@@ -28,7 +28,8 @@ class SOQLBuilder extends Builder
         //$pdo = new \Illuminate\Database\PDO\Connection($pdo);
 
 		$query->connection = new SOQLConnection();
-		$query->grammar = new SOQLGrammar();
+		// $query->grammar = new SOQLGrammar();
+        $query->grammar = new SOQLGrammar($query->connection);
         $query->connection->setGrammar($query->grammar);
 
 		parent::__construct($query);
@@ -116,7 +117,8 @@ class SOQLBuilder extends Builder
      * @param null $page
      * @param null $total
      */
-	public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null, $total = null)
+	// public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null)
+    public function paginate($perPage = null, $columns = ['*'], $pageName = 'page', $page = null, $total = null)
 	{
 		$columns = $this->getSalesForceColumns($columns);
 
